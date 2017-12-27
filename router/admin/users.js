@@ -7,8 +7,8 @@ var nodemailer = require('nodemailer');
 var transporter = nodemailer.createTransport({  
   service: 'qq',  
   auth: {  
-    user: '783007473@qq.com',  
-    pass: 'qavlkkzuctbdbeaf'  
+    user: '*********@qq.com',  
+    pass: '*********'  
   }  
 });  
 
@@ -79,7 +79,7 @@ module.exports = function () {
                         res.status(400).send({code: 400, msg: 'parameters error'});
                     }else{
                         var mailOptions = {  
-                            from: '783007473@qq.com', // 发送者  
+                            from: '*********@qq.com', // 发送者  
                             to: perData[0].email, // 接受者,可以同时发送多个,以逗号隔开  
                             subject: '后台管理账号发送', // 标题 
                             html: `<h2>您的后台管理账号为:</h2><h3>用户名：`+perData[0].username+`</h3><h3 style="color:red;">密码：`+perData[0].password+`</h3><h3>网址：http://192.168.50.101:8081/admin</h3>`,
