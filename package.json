@@ -1,0 +1,38 @@
+{
+  "name": "ejs-express-mysql",
+  "version": "1.0.0",
+  "description": "ejs+express+mysql实现的后台管理",
+  "main": "server",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "node",
+    "express",
+    "ejs",
+    "mysql"
+  ],
+  "author": "tao",
+  "license": "ISC",
+  "devDependencies": {
+    "body-parser": "^1.16.1",
+    "consolidate": "^0.14.5",
+    "cookie-parser": "^1.4.3",
+    "cookie-session": "^2.0.0-beta.1",
+    "ejs": "^2.5.6",
+    "express": "^4.14.1",
+    "express-router": "0.0.1",
+    "express-static": "^1.0.3",
+    "multer": "^1.3.0",
+    "mysql": "^2.13.0"
+  },
+  "dependencies": {
+    "busboy": "^0.2.14",
+    "connect-busboy": "0.0.2",
+    "csv-parse": "^2.0.0",
+    "excel-export": "^0.5.1",
+    "formidable": "^1.1.1",
+    "nodemailer": "^4.4.1",
+    "xlsx": "^0.11.15"
+  }
+}
