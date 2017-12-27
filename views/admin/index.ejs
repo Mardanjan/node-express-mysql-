@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="utf-8" style="height: 100%">
+<head>
+    <meta charset="UTF-8">
+    <title>后台管理-首页</title>
+    <link rel="stylesheet" type="text/css" href="/files/css/index.css">
+    <link rel="stylesheet" type="text/css" href="/files/css/pagination.css">
+    <script type="text/javascript" src="/files/js/jquery.min.js"></script> 
+    <script src="/files/js/index.js"></script>
+    <style type="text/css">            
+            .box {
+                width: 100%;
+                height: 50px;
+                margin:auto 0;
+            }
+            
+            .page {
+               width: 75%;
+               text-align: center;
+            }
+            
+            .info {
+                width: 200px;
+                height: 50px;
+                line-height: 50px;
+            }
+            
+            .fl {
+                float: left;
+            }
+            .box span{
+                line-height: 20px;
+            }
+    </style>
+</head>
+<body style="height: 100%;display: flex;flex-direction: column;">
+  <%include common/top.ejs%>
+  <div class="con" style="flex:1;overflow: hidden;">
+        <div class="add_button">
+          <img src="/files/img/add.png">
+        </div>
+        <div class="add_form">
+            <!-- <img src="/files/img/add.png"> -->
+            <div class="form_bg"></div>
+            <form action="?" method="post">
+                条码: <input type="text" name="code" autofocus="autofocus" value=""><br>
+                名称: <input type="text" name="name" value=""><br>
+                价格: <input type="text" name="price" value=""><br>
+                品类: <input type="text" name="category" value=""><br>
+                品牌: <input type="text" name="brand" value=""><br>
+                单位: <input type="text" name="unit" value=""><br>
+                <input type="submit" value="确认新增">
+            </form>
+        </div>
+        <%if(typeof modData != 'undefined'){%>
+        <div class="add_form" style="display: flex">
+            <!-- <img src="/files/img/add.png"> -->
+            <div class="form_bg"></div>
+            <form action="?" method="post">
+                <input type="hidden" name="modified" value="<%= modData[0].id %>">
+                条码: <input type="text" name="code" autofocus="autofocus" value="<%=modData[0].code%>"><br>
+                名称: <input type="text" name="name" value="<%=modData[0].name%>"><br>
+                价格: <input type="text" name="price" value="<%=modData[0].price%>"><br>
+                品类: <input type="text" name="category" value="<%=modData[0].category%>"><br>
+                品牌: <input type="text" name="brand" value="<%=modData[0].brand%>"><br>
+                单位: <input type="text" name="unit" value="<%=modData[0].unit%>"><br>
+                <input type="submit" value="确认修改">
+            </form>
+        </div>
+        <%}%>
+        <div style="display: flex;flex-direction: column;height: 100%;">
+            <div style="flex: 1;overflow: auto;">
+                <table>
+                    <tr>
+                        <th class="id">ID</th>
+                        <th class="code">条码</th>
+                        <th class="name">名称</th>
+                        <th class="price">价格</th>
+                        <th class="category">品类</th>
+                        <th class="brand">品牌</th>
+                        <th class="unit">单位</th>
+                        <th>操作</th>
+                    </tr>
+                    <% for(var i = 0;i<formData.length;i++){%>
+                    <tr>
+                        <td><%=formData[i].id%></td>
+                        <td><%=formData[i].code%></td>
+                        <td><%=formData[i].name%></td>
+                        <td><%=formData[i].price%></td>
+                        <td><%=formData[i].category%></td>
+                        <td><%=formData[i].brand%></td>
+                        <td><%=formData[i].unit%></td>
+                        <td>
+                            <a href="?action=del&id=<%=formData[i].id%>&page=<%=currentPage%>" onclick="return confirm('确定删除？')">
+                                <button>删除</button>
+                            </a>
+                            <a href="?action=mod&id=<%=formData[i].id%>&page=<%=currentPage%>">
+                                <button>修改</button>
+                            </a>
+                        </td>
+                    </tr>
+                    <%}%>
+                </table>
+            </div>
+            <div class="box">
+                <div id="pagination1" class="page fl"></div>
+                <div style="height: 40px;">
+                   总条数:<span><%=totalCount%></span>
+                   总页数:<span><%=totalPages%></span>
+                   当前页数：<span id="current1"><%=currentPage%></span>
+                <!-- 导入导出 -->
+                  <button><a href="?action=export">导出</a></button>
+                  <form action="admin/import" method="post" enctype="multipart/form-data">
+                      <input type="file" name="file" multiple="multiple">
+                      <input type="submit" value="提交">
+                  </form>
+                </div>
+            </div>
+        </div>
+  </div>
+  <script type="text/javascript" src="/files/js/jquery.pagination.js"></script>
+  <script type="text/javascript">
+      $(function () {
+        $("#pagination1").pagination({
+            currentPage: <%=currentPage%>,
+            totalPage: <%=totalPages%>,
+            callback: function(current) {
+                $("#current1").text(current);
+                window.location.href = "?page=" +current;
+            }
+        });
+      })
+  </script>
+</body>
+</html>

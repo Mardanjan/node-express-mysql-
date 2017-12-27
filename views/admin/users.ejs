@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="utf-8" style="height: 100%">
+<head>
+    <meta charset="UTF-8">
+    <title>后台管理-用户管理</title>
+    <link rel="stylesheet" type="text/css" href="/files/css/index.css">
+    <script type="text/javascript" src="/files/js/jquery.min.js"></script>
+    <script src="/files/js/index.js"></script>
+</head>
+<body style="height: 100%;display: flex;flex-direction: column;">
+  <%include common/top.ejs%>
+  <div class="con" style="flex:1;overflow: auto;">
+      <div class="add_button">
+          <img src="/files/img/add.png">
+      </div>
+      <!-- 新增 -->
+      <div class="add_form">
+        <!-- <img src="/files/img/add.png"> -->
+        <div class="form_bg"></div>
+        <form action="?" method="post" enctype="multipart/form-data">
+            用户名: <input type="text" name="username" autofocus="autofocus"><br>
+            邮箱: <input type="email" name="email"><br>
+            头像: <input type="file" name="pic_header"><br>
+            密码: <input type="text" name="password"><br>
+            <input type="submit" value="确认新增">
+        </form>
+      </div>
+      <!-- 修改 -->
+       <%if(typeof modData != 'undefined'){%>
+      <div class="add_form" style="display: flex">
+        <!-- <img src="/files/img/add.png"> -->
+        <div class="form_bg"></div>
+        <form action="?" method="post" enctype="multipart/form-data">
+            <input type="hidden" name="modified" value="<%= usersData[0].id %>">
+            <input type="hidden" name="username" autofocus="autofocus" value="<%= usersData[0].username %>">
+            用户名: <input type="text" name="" autofocus="autofocus" value="<%= usersData[0].username %>" disabled><br>
+            邮箱: <input type="email" name="email" value="<%= usersData[0].email %>"><br>
+            头像: <input type="file" name="pic_header" value="<%= usersData[0].pic_header %>"><br>
+            密码: <input type="text" name="password" value="<%= usersData[0].password %>"><br>
+            <input type="submit" value="确认修改">
+        </form>
+      </div>
+      <%}%>
+      <!--  -->
+      <table>
+            <tr>
+                <th class="id">ID</th>
+                <th class="username">用户名</th>
+                <th class="email">邮箱</th>
+                <th class="pic_header">头像</th>
+                <th class="password">密码</th>
+                <th>操作</th>
+            </tr>
+            <% for(var i = 0;i<usersData.length;i++){%>
+            <tr>
+                <td><%=usersData[i].id%></td>
+                <td><%=usersData[i].username%></td>
+                <td><%=usersData[i].email%></td>
+                <td><img src="<%=usersData[i].pic_header%>" alt=""></td>
+                <td><%=usersData[i].password%></td>
+                <td>
+                    <a href="?action=del&id=<%=usersData[i].id%>" onclick="return confirm('确定删除？')">
+                        <button>删除</button>
+                    </a>
+                    <a href="?action=mod&id=<%=usersData[i].id%>">
+                        <button>修改</button>
+                    </a>
+                    <a href="?action=email&id=<%=usersData[i].id%>">
+                        <button style="width: 50px">发邮件</button>
+                    </a>
+                </td>
+            </tr>
+            <%}%>
+        </table>
+  </div>
+</body>
+</html>
