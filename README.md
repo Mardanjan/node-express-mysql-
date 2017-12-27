@@ -19,3 +19,5 @@
 admin_table  (id username password)
 blog_list_table (id code name price category unit brand)
 user_table (id username email pic_header password)
+
+首页 http://localhost:8081/admin
